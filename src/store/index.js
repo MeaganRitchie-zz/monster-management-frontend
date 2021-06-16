@@ -35,6 +35,18 @@ export default createStore({
     const user = await response.json()
     commit("setUser", user)
   },
+  async updatePoints({ commit }) {
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        student
+      }),
+    }
+    const response = await fetch("http://localhost:9000/student/:id", requestOptions)
+    const student = await response.json()
+    commit("setStudents, student")
+  },
 
   modules: {
   }

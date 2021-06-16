@@ -28,8 +28,9 @@
             placeholder="Password"
             v-model="password"
           />
-
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <router-link to="/classroom">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </router-link>
         </form>
       </div>
       <div class="col-md-3"></div>

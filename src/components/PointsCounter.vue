@@ -47,8 +47,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 button {
   margin: 10px;
+  margin-bottom: 0px;
 }
 </style>

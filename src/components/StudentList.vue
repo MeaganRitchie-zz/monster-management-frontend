@@ -49,7 +49,4 @@ export default {
 li {
   list-style: none;
 }
-button {
-  margin: 10px;
-}
 </style>

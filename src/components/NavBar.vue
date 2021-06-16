@@ -3,6 +3,7 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/classroom">Classroom</router-link>
+    <!-- <router-link v-if="isLoggedIn" to="/classroom"> |Classroom</router-link> -->
   </header>
 </template>
 
@@ -12,7 +13,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: rgb(17, 175, 161);
+  color: #2eb7d9;
 }
 
 #nav {
@@ -22,7 +23,7 @@
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #2eb7d9;
     }
   }
 }

@@ -1,9 +1,8 @@
 <template>
   <div class="hello">
     <h1>YOUR CLASSROOM</h1>
-    <b-container class="bv-example-row">
-      <StudentList :students="students" />
-    </b-container>
+
+    <StudentList :students="students" />
   </div>
 </template>
 
@@ -27,8 +26,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hello {
+  display: flex;
+  flex-direction: column;
+}
 .hello h1 {
-  text-shadow: 1px 2px #d2d2d2;
+  text-shadow: 1px 2px #cae0e6;
+  font-family: "couturebold";
 }
 
 ul {
@@ -36,7 +40,6 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 a {

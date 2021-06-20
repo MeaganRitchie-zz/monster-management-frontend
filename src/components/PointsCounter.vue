@@ -1,26 +1,32 @@
 <template>
-  <div>
-    <div class="incrementer">
-      <p>{{ countString }}</p>
+  <div class="incrementer">
+    <p>{{ clickedStudent.points }}</p>
+  </div>
+  <div class="points-container">
+    <button @click="positivePoints = true">POSITIVE</button>
+    <button @click="positivePoints = false">NEEDS WORK</button>
+    <div v-if="positivePoints" class="positive-buttons">
+      <button @click="increment" class="btn btn-primary increment-button">
+        responsibility
+      </button>
+      <button @click="increment" class="btn btn-primary increment-button">
+        on task
+      </button>
+      <button @click="increment" class="btn btn-primary increment-button">
+        helping others
+      </button>
     </div>
-    <button
-      @click="increment"
-      href="#"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#staticBackdrop"
-    >
-      Great Job!
-    </button>
-    <button
-      @click="decrement"
-      href="#"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#staticBackdrop"
-    >
-      Needs Work
-    </button>
+    <div v-if="!positivePoints" class="negative-buttons">
+      <button @click="decrement" class="btn btn-primary decrement-button">
+        disrespectful
+      </button>
+      <button @click="decrement" class="btn btn-primary decrement-button">
+        off task
+      </button>
+      <button @click="decrement" class="btn btn-primary decrement-button">
+        unprepared
+      </button>
+    </div>
   </div>
 </template>
 
@@ -28,28 +34,77 @@
 export default {
   data() {
     return {
-      count: 0,
+      positivePoints: false,
+      negativePoints: false,
     };
   },
   computed: {
-    countString() {
-      return ` ${this.count}`;
+    clickedStudent() {
+      return this.$store.state.clickedStudent;
     },
   },
   methods: {
     increment() {
-      this.count = this.count + 1;
+      this.clickedStudent.points += 1;
+      fetch(`http://localhost:9000/students/${this.clickedStudent.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          points: this.clickedStudent.points,
+        }),
+      });
     },
     decrement() {
-      this.count = this.count - 1;
+      this.clickedStudent.points -= 1;
+      fetch(`http://localhost:9000/students/${this.clickedStudent.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          points: this.clickedStudent.points,
+        }),
+      });
     },
   },
 };
 </script>
 
 <style scoped>
+.incrementer {
+  font-size: 20px;
+}
+.points-container {
+  display: flex;
+}
 button {
   margin: 10px;
+  padding: 5px;
   margin-bottom: 0px;
+  font-size: 12px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px grey;
+}
+.increment-button {
+  background-color: #a4d077;
+  border-color: #a3d077;
+  box-shadow: 1px 1px 2px #93bb6a;
+}
+.increment-button:hover {
+  background-color: #93bb6a;
+  border-color: #93bb6a;
+}
+.decrement-button {
+  background-color: #a67acf;
+  border-color: #a67acf;
+  box-shadow: 1px 1px 2px #9671b8;
+}
+.decrement-button:hover {
+  background-color: #9671b8;
+  border-color: #9671b8;
 }
 </style>

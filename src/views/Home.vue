@@ -31,7 +31,7 @@ export default {
 <style scoped>
 .home-page {
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
   background-image: linear-gradient(
       to bottom,
       rgba(250, 136, 176, 0.7),
@@ -48,6 +48,7 @@ export default {
   font-weight: bold;
   letter-spacing: 0.05em;
   margin: 30px;
+
   box-shadow: 1px 1px 4px #1a6679;
   width: 150px;
 }

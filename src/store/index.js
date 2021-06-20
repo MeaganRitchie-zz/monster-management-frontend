@@ -3,14 +3,21 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     students: [],
-    user: {}
+    user: {},
+    clickedStudent: {}
   },
   mutations: {
     setStudents(state, students) {
-      state.students = students
+      const sortedStudents = students.sort((studentA, studentB) => {
+        return studentA.name.localeCompare(studentB.name)
+      })
+      state.students = sortedStudents
     },
     setUser(state, user) {
       state.user = user
+    },
+    setClickedStudent(state, clickedStudent) {
+      state.clickedStudent = clickedStudent
     }
   },
   actions: {
@@ -18,7 +25,12 @@ export default createStore({
       const response = await fetch('http://localhost:9000/students')
       const students = await response.json()
       commit("setStudents", students)
+    },
+
+    selectStudent({ commit }, clickedStudent) {
+      commit("setClickedStudent", clickedStudent)
     }
+
   },
   async createStudent({ commit }) {
     const requestOptions = {
@@ -35,18 +47,18 @@ export default createStore({
     const user = await response.json()
     commit("setUser", user)
   },
-  async updatePoints({ commit }) {
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        student
-      }),
-    }
-    const response = await fetch("http://localhost:9000/student/:id", requestOptions)
-    const student = await response.json()
-    commit("setStudents, student")
-  },
+  // async updatePoints({ commit }) {
+  //   const requestOptions = {
+  //     method: "PUT",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       student
+  //     }),
+  //   }
+  //   const response = await fetch("http://localhost:9000/student/:id", requestOptions)
+  //   const student = await response.json()
+  //   commit("setStudents, student")
+  // },
 
   modules: {
   }

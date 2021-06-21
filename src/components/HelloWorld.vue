@@ -32,7 +32,8 @@ export default {
 }
 .hello h1 {
   text-shadow: 1px 2px #cae0e6;
-  font-family: "couturebold";
+  font-family: "pleasewritemeasongmedium";
+  font-size: 40px;
 }
 
 ul {

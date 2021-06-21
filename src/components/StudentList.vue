@@ -2,13 +2,7 @@
   <div class="card-container">
     <ul class="student-container">
       <li v-for="student in students" :key="student.id">
-        <div class="card" style="width: 15rem">
-          <!-- <img
-            v-bind:src="student.avatar"
-            class="card-img-top"
-            alt="student avatar"
-          /> -->
-
+        <div class="card" style="width: 9rem">
           <h5 class="card-header">{{ student.name }}</h5>
           <div class="card-body">
             <p>
@@ -16,7 +10,7 @@
             </p>
             <button
               @click="showModal(student)"
-              class="btn btn-primary"
+              class="btn btn open"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
             >
@@ -25,8 +19,8 @@
           </div>
         </div>
       </li>
-      <li>
-        <div></div>
+      <li class="plus">
+        <p>+</p>
       </li>
     </ul>
   </div>
@@ -37,14 +31,13 @@
         <div class="modal-wrapper">
           <div class="modal-container">
             <div class="modal-header">
-              <h3>i'm the modal</h3>
+              <h3>Give feedback to {{ clickedStudent.name }}!</h3>
+              <button class="close-modal-button" @click="isModal = false">
+                x
+              </button>
             </div>
             <div class="modal-body">
               <PointsCounter />
-              <button
-                class="close-modal-button"
-                @click="isModal = false"
-              ></button>
             </div>
           </div>
         </div>
@@ -54,7 +47,6 @@
 </template>
 
 <script>
-// import FeedbackModal from "@/components/FeedbackModal";
 import PointsCounter from "@/components/PointsCounter";
 
 export default {
@@ -72,6 +64,11 @@ export default {
       this.$store.dispatch("selectStudent", clickedStudent);
     },
   },
+  computed: {
+    clickedStudent() {
+      return this.$store.state.clickedStudent;
+    },
+  },
   components: {
     // FeedbackModal,
     PointsCounter,
@@ -85,9 +82,33 @@ export default {
   flex-direction: row;
   width: 100vw;
 }
-
+.card {
+  margin: 10px;
+  box-shadow: 0.3px 0.3px 1px rgb(62, 62, 62);
+}
 .card-header {
-  background-color: lightgrey;
+  background-color: rgb(222, 222, 222);
+  font-family: "dk_lemon_yellow_sunregular";
+  font-size: 35px;
+  padding: 2px;
+  color: black;
+}
+.card-body p {
+  font-family: "dk_lemon_yellow_sunregular";
+  font-size: 30px;
+}
+.open {
+  background-color: #a3d077;
+  padding: 2px;
+  color: white;
+  font-size: 15px;
+}
+.open:hover {
+  background-color: #96c06c;
+  padding: 2px;
+  color: white;
+  font-size: 15px;
+  transform: translateY(1px);
 }
 
 .student-container {
@@ -95,28 +116,38 @@ export default {
   flex-wrap: wrap;
 }
 
-.card {
-  margin: 10px;
-}
-
 li {
   list-style: none;
 }
 
+.plus {
+  font-size: 70px;
+  text-shadow: 1px 2px #cae0e6;
+  width: 9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plus:hover {
+  text-shadow: 3px 3px #cae0e6;
+  cursor: pointer;
+}
+
 .close-modal-button {
-  position: absolute;
-  right: 0px;
-  background-color: #ff6b9fe3;
-  border-color: #ff6b9fe3;
-  border-radius: 15px;
-  padding: 3px;
-  height: 20px;
-  width: 20px;
+  background-color: lightgrey;
+  border: none;
+  border-radius: 55px;
+  font-family: "dk_lemon_yellow_sunregular";
+  padding-left: 8px;
+  padding-right: 8px;
+  box-shadow: 0px 1px 0px grey;
 }
 .close-modal-button:hover {
-  background-color: #f7528c;
-  border-color: #f7528c;
+  box-shadow: 0 0.1em 0.5em rgba(0, 0, 0, 0.4), 0 0.1em 0.2em rgba(0, 0, 0, 0.4),
+    0 -0.1em 0.07em rgba(0, 0, 0, 0.3) inset,
+    0 0.1em 0.07em rgba(255, 255, 255, 0.2) inset;
 }
+
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -135,7 +166,8 @@ li {
 }
 
 .modal-container {
-  width: 300px;
+  width: 500px;
+  height: 450px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -147,11 +179,15 @@ li {
 
 .modal-header h3 {
   margin-top: 0;
-  color: #2eb7d9;
+  font-size: 50px;
+  font-family: "dk_lemon_yellow_sunregular";
+  color: black;
 }
 
 .modal-body {
   margin: 20px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-default-button {

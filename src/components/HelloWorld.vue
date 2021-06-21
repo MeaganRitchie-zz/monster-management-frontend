@@ -31,6 +31,8 @@ export default {
   flex-direction: column;
 }
 .hello h1 {
+  margin-top: 18px;
+  margin-bottom: 20px;
   text-shadow: 1px 2px #cae0e6;
   font-family: "pleasewritemeasongmedium";
   font-size: 40px;

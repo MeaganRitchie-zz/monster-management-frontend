@@ -31,7 +31,7 @@ export default {
 <style scoped>
 .home-page {
   width: 100vw;
-  height: 95vh;
+  height: 91vh;
   background-image: linear-gradient(
       to bottom,
       rgba(250, 136, 176, 0.7),

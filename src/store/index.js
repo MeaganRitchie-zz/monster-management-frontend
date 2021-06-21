@@ -4,7 +4,8 @@ export default createStore({
   state: {
     students: [],
     user: {},
-    clickedStudent: {}
+    clickedStudent: {},
+    isloggedIn: false
   },
   mutations: {
     setStudents(state, students) {
@@ -18,6 +19,9 @@ export default createStore({
     },
     setClickedStudent(state, clickedStudent) {
       state.clickedStudent = clickedStudent
+    },
+    setIsLoggedIn(state, isLoggedIn) {
+      state.isLoggedIn = isLoggedIn
     }
   },
   actions: {
@@ -29,6 +33,10 @@ export default createStore({
 
     selectStudent({ commit }, clickedStudent) {
       commit("setClickedStudent", clickedStudent)
+    },
+
+    logIn({ commit }) {
+      commit("setIsLoggedIn", true)
     }
 
   },

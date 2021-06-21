@@ -70,7 +70,6 @@ export default {
     },
   },
   components: {
-    // FeedbackModal,
     PointsCounter,
   },
 };
@@ -179,7 +178,7 @@ li {
 
 .modal-header h3 {
   margin-top: 0;
-  font-size: 50px;
+  font-size: 45px;
   font-family: "dk_lemon_yellow_sunregular";
   color: black;
 }

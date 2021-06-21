@@ -64,6 +64,11 @@ export default {
         .then((response) => console.log("response", response));
     },
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    },
+  },
 };
 </script>
 

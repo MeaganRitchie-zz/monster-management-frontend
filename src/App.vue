@@ -1,5 +1,5 @@
 <template>
-  <div class="app-flex">
+  <div class="app">
     <NavBar />
     <router-view />
     <footer>
@@ -18,11 +18,11 @@ export default {
   },
 };
 </script>
-<style scoped>
-.app-flex {
+<style >
+.app {
   display: flex;
   flex-flow: column;
-  align-items: space-between;
+  justify-content: space-between;
 }
 
 @font-face {

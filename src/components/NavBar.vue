@@ -3,7 +3,6 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/classroom">Classroom</router-link> |
     <router-link to="/resources">Resources</router-link>
-    <router-link v-if="isLoggedIn">Logout</router-link>
   </header>
 </template>
 

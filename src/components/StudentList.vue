@@ -16,6 +16,14 @@
             >
               Give Feedback
             </button>
+            <button
+              @click="showGraph(student)"
+              class="btn btn open-data"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              See Data
+            </button>
           </div>
         </div>
       </li>
@@ -25,6 +33,23 @@
     </ul>
   </div>
 
+  <div v-if="isGraph" class="chart">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <div class="modal-header chart">
+            <h3>Behavior data for {{ clickedStudent.name }}</h3>
+            <button class="close-modal-button chart" @click="isGraph = false">
+              x
+            </button>
+          </div>
+          <div class="modal-body">
+            <Chart />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <transition name="modal">
     <div v-if="isModal">
       <div class="modal-mask">
@@ -48,6 +73,7 @@
 
 <script>
 import PointsCounter from "@/components/PointsCounter";
+import Chart from "@/components/Chart.vue";
 
 export default {
   props: {
@@ -56,11 +82,16 @@ export default {
   data() {
     return {
       isModal: false,
+      isGraph: false,
     };
   },
   methods: {
     showModal(clickedStudent) {
       this.isModal = true;
+      this.$store.dispatch("selectStudent", clickedStudent);
+    },
+    showGraph(clickedStudent) {
+      this.isGraph = true;
       this.$store.dispatch("selectStudent", clickedStudent);
     },
   },
@@ -71,6 +102,7 @@ export default {
   },
   components: {
     PointsCounter,
+    Chart,
   },
 };
 </script>
@@ -95,14 +127,19 @@ export default {
 .card-body p {
   font-family: "dk_lemon_yellow_sunregular";
   font-size: 30px;
+  margin: 4px;
 }
-.open {
+.open,
+.open-data {
   background-color: #a3d077;
   padding: 2px;
   color: white;
   font-size: 15px;
+  margin-bottom: 3px;
 }
-.open:hover {
+
+.open:hover,
+.open-data:hover {
   background-color: #96c06c;
   padding: 2px;
   color: white;
@@ -183,6 +220,9 @@ li {
   color: black;
 }
 
+.chart h3 {
+  font-size: 35px;
+}
 .modal-body {
   margin: 20px 0;
   display: flex;

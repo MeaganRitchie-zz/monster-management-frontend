@@ -38,7 +38,6 @@ a:hover {
 }
 
 img {
-  margin-top: 5px;
   width: 75px;
 }
 </style>
